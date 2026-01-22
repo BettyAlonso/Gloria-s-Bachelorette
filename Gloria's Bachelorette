@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gloria’s Bachelorette — El Último Pintxo</title>
+  <style>
+    :root{
+      --pink:#f6d7df;
+      --pink2:#fbe7ec;
+      --bottle:#1f4f3c;
+      --bottle2:#2e6a52;
+      --cream:#fff7f9;
+      --ink:#17392c;
+      --shadow: 0 10px 25px rgba(0,0,0,.12);
+      --radius: 18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(1000px 500px at 20% 10%, var(--pink2), transparent 70%),
+        radial-gradient(900px 600px at 90% 30%, #f3c8d4, transparent 70%),
+        linear-gradient(180deg, var(--pink), #f0c9d4 55%, #f7dde4);
+      color:#10261d;
+    }
+    header{
+      padding: 20px 16px 10px;
+      text-align:center;
+    }
+    .badge{
+      display:inline-block;
+      padding:6px 12px;
+      border:2px solid var(--bottle);
+      border-radius:999px;
+      color:var(--bottle);
+      background:rgba(255,255,255,.55);
+      font-weight:700;
+      letter-spacing:.3px;
+      margin-bottom:10px;
+    }
+    h1{
+      margin:8px 0 6px;
+      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      color:var(--bottle);
+      font-size: 34px;
+      line-height:1.05;
+    }
+    .subtitle{
+      margin:0;
+      font-weight:650;
+      color: var(--ink);
+      opacity:.9;
+    }
+    .wrap{
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 12px 14px 60px;
+    }
+
+    .tabs{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin: 14px 0 16px;
+    }
+    .tabbtn{
+      border:2px solid var(--bottle);
+      background: rgba(255,255,255,.65);
+      color: var(--bottle);
+      padding: 10px 14px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight:800;
+      box-shadow: 0 4px 12px rgba(0,0,0,.08);
+      transition: transform .08s ease, background .2s ease;
+      user-select:none;
+    }
+    .tabbtn:active{ transform: scale(.98); }
+    .tabbtn.active{
+      background: var(--bottle);
+      color: var(--cream);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 14px;
+    }
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: rgba(255,255,255,.72);
+      border: 2px solid rgba(31,79,60,.25);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      position: relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(circle at 10px 10px, rgba(31,79,60,.22) 2px, transparent 3px) 0 0/26px 26px;
+      opacity:.25;
+      pointer-events:none;
+    }
+    .card > *{ position:relative; }
+
+    .h2{
+      margin: 2px 0 10px;
+      color: var(--bottle);
+      font-size: 18px;
+      letter-spacing:.2px;
+      font-weight:900;
+    }
+    .muted{ color:#1a3a2c; opacity:.75; }
+    .row{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+
+    button.primary{
+      background: var(--bottle);
+      color: var(--cream);
+      border: 0;
+      padding: 11px 14px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:900;
+      box-shadow: 0 8px 16px rgba(31,79,60,.25);
+      transition: transform .08s ease, filter .15s ease;
+    }
+    button.primary:active{ transform: scale(.98); }
+    button.ghost{
+      background: rgba(255,255,255,.7);
+      border: 2px solid var(--bottle);
+      color: var(--bottle);
+      padding: 10px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(31,79,60,.10);
+      border:1px solid rgba(31,79,60,.22);
+      color: var(--bottle);
+      font-weight:800;
+      font-size: 13px;
+    }
+
+    .big{
+      font-size: 22px;
+      line-height:1.25;
+      font-weight:900;
+      color: #133126;
+      margin: 6px 0 10px;
+    }
+    .box{
+      background: rgba(246,215,223,.35);
+      border: 2px dashed rgba(31,79,60,.35);
+      border-radius: 16px;
+      padding: 12px;
+      margin-top: 10px;
+    }
+
+    .choices{ display:grid; gap:10px; margin-top:10px; }
+    .choice{
+      text-align:left;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border:2px solid rgba(31,79,60,.25);
+      background: rgba(255,255,255,.65);
+      cursor:pointer;
+      font-weight:850;
+      color:#17392c;
+    }
+    .choice:hover{ border-color: rgba(31,79,60,.55); }
+    .choice.correct{ border-color: rgba(46,106,82,.95); background: rgba(46,106,82,.10); }
+    .choice.wrong{ border-color: rgba(170,40,70,.8); background: rgba(170,40,70,.08); }
+
+    .divider{
+      height:1px;
+      background: rgba(31,79,60,.20);
+      margin: 10px 0;
+    }
+    .small{ font-size: 13px; }
+
+    .hidden{ display:none !important; }
+    a{ color: var(--bottle); font-weight:800; text-decoration:none; }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="badge">#TeamBride · 13–15 març · Logroño</div>
+  <h1>¡El Último Pintxo!</h1>
+  <p class="subtitle">Juego de despedida · Rosa + verde botella · Frangélico mode: ON</p>
+</header>
+
+<div class="wrap">
+  <div class="tabs" id="tabs">
+    <div class="tabbtn active" data-tab="cartas">🎴 Cartas</div>
+    <div class="tabbtn" data-tab="quiz">💘 Quiz del novio</div>
+    <div class="tabbtn" data-tab="frangelico">🎲 Frangélico decide</div>
+    <div class="tabbtn" data-tab="pasapalabra">⏱️ Pasapalabra</div>
+    <div class="tabbtn" data-tab="ajustes">⚙️ Ajustes</div>
+  </div>
+
+  <!-- CARTAS -->
+  <section class="grid" id="tab-cartas">
+    <div class="card">
+      <div class="h2">🎴 Cartas de pruebas / preguntas</div>
+      <div class="row">
+        <span class="pill" id="deckInfo">Mazo: 0 cartas</span>
+        <span class="pill" id="repeatInfo">No repetir: ON</span>
+        <span class="pill" id="alcoholInfo">Alcohol: ON</span>
+      </div>
+
+      <div class="box">
+        <div class="muted small">Pulsa para sacar una carta. Si “no repetir” está activado, no saldrá la misma hasta agotar el mazo.</div>
+        <div class="big" id="cardText">Lista para la primera carta ✨</div>
+        <div class="row">
+          <span class="pill" id="cardTag">—</span>
+          <span class="pill" id="cardType">—</span>
+          <span class="pill" id="cardDrink">—</span>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="drawCardBtn">Sacar carta</button>
+        <button class="ghost" id="undoCardBtn">Deshacer</button>
+        <button class="ghost" id="resetDeckBtn">Reset mazo</button>
+      </div>
+
+      <div class="divider"></div>
+      <div class="muted small">
+        Truco: puedes usar cartas “Suave/Medio/Caótico” con pesos distintos (ver Ajustes).
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h2">📜 Historial</div>
+      <div class="muted small">Para acordarse mañana (o para negociar 😇).</div>
+      <div id="history" class="small" style="margin-top:10px; display:grid; gap:8px;"></div>
+      <div class="divider"></div>
+      <button class="ghost" id="clearHistoryBtn">Borrar historial</button>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="grid hidden" id="tab-quiz">
+    <div class="card">
+      <div class="h2">💘 Quiz del novio (con respuestas ya fijadas)</div>
+      <div class="row">
+        <span class="pill" id="quizProgress">Pregunta 0/0</span>
+        <span class="pill" id="quizScore">Aciertos: 0</span>
+        <span class="pill" id="quizModeInfo">Probabilidad: ON</span>
+      </div>
+
+      <div class="box">
+        <div class="muted small">Responde sin mirar la clave. Al final calculamos la probabilidad de “castigo” según aciertos.</div>
+        <div class="big" id="quizQ">Pulsa “Empezar”</div>
+        <div class="choices" id="quizChoices"></div>
+        <div class="divider"></div>
+        <div id="quizFeedback" class="small muted"></div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="quizStartBtn">Empezar</button>
+        <button class="ghost" id="quizNextBtn" disabled>Siguiente</button>
+        <button class="ghost" id="quizResetBtn">Reset</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h2">🎯 Resultado y “¿toca?”</div>
+      <div class="muted small">Probabilidad depende de aciertos. Puedes activar “sin alcohol” en Ajustes.</div>
+
+      <div class="box">
+        <div class="big" id="quizResult">Aún no hay resultado.</div>
+        <div class="row">
+          <span class="pill" id="pMinMax">pmin — / pmax —</span>
+          <span class="pill" id="pNow">p —</span>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="rollPunishBtn">Tirar “¿toca?”</button>
+        <button class="ghost" id="revealAnswersBtn">Ver clave del novio</button>
+      </div>
+
+      <div class="divider"></div>
+      <div id="answerKey" class="small muted hidden"></div>
+    </div>
+  </section>
+
+  <!-- FRANGELICO -->
+  <section class="grid hidden" id="tab-frangelico">
+    <div class="card">
+      <div class="h2">🎲 El Frangélico decide</div>
+      <div class="row">
+        <span class="pill" id="frUses">Usos: 0/3</span>
+        <span class="pill" id="frNoAlcohol">Modo sin alcohol: OFF</span>
+      </div>
+
+      <div class="box">
+        <div class="muted small">Regla sugerida: máximo 3 usos en todo el finde (editable en Ajustes).</div>
+        <div class="big" id="frText">¿Nos dejamos llevar…?</div>
+      </div>
+
+      <div class="row" style="margin-top:12px">
+        <button class="primary" id="frRollBtn">Frangélico decide</button>
+        <button class="ghost" id="frResetBtn">Reset contador</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h2">🧾 Reglas rápidas</div>
+      <ul class="small" style="margin:0; padding-left:18px; color:#17392c">
+        <li>Si sale “chupito” y está activado “sin alcohol” → cambia por “reto rápido”.</li>
+        <li>Si os estáis viniendo arriba demasiado pronto → activad “Suave”.</li>
+        <li>Objetivo: risa + fotos bonitas (con permiso 😌).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PASAPALABRA -->
+  <section class="grid hidden" id="tab-pasapalabra">
+    <div class="card">
+      <div class="h2">⏱️ Pasapalabra</div>
+      <div class="row">
+        <span class="pill" id="ppTimer">Tiempo: 90s</span>
+        <span class="pill" id="ppIndex">Letra: A</span>
+      </div>
+
+      <div class="box">
+        <div class="muted small">Pulsa “Start” y ve pasando letras. Si falla/“pasa”, sorbo (o reto light).</div>
+        <div class="big" id="ppClue">—</div>
+        <div class="divider"></div>
+        <div class="row">
+          <button class="primary" id="ppStartBtn">Start</button>
+          <button class="ghost" id="ppPassBtn" disabled>Pasa</button>
+          <button class="ghost" id="ppShowBtn" disabled>Mostrar palabra</button>
+          <button class="ghost" id="ppResetBtn">Reset</button>
+        </div>
+        <div id="ppWord" class="small muted" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h2">📌 Marcador (simple)</div>
+      <div class="muted small">Puedes usarlo “a ojo” o llevar recuento.</div>
+      <div class="box">
+        <div class="row">
+          <span class="pill" id="ppPassed">Pasadas: 0</span>
+          <span class="pill" id="ppShown">Reveladas: 0</span>
+        </div>
+        <div class="divider"></div>
+        <div class="small muted">Sugerencia: por cada 3 reveladas, mini-castigo o reto (sin alcohol si queréis).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AJUSTES -->
+  <section class="grid hidden" id="tab-ajustes">
+    <div class="card">
+      <div class="h2">⚙️ Ajustes rápidos</div>
+      <div class="row">
+        <button class="ghost" id="toggleNoRepeatBtn">No repetir: ON</button>
+        <button class="ghost" id="toggleAlcoholBtn">Alcohol: ON</button>
+        <button class="ghost" id="toggleChaosBtn">Modo: Medio</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="h2">🎯 Quiz: probabilidad (pmin / pmax)</div>
+      <div class="muted small">Se usa la fórmula: p = pmin + (1 - aciertos/N)·(pmax-pmin)</div>
+      <div class="row" style="margin-top:8px">
+        <label class="pill">pmin <input id="pmin" type="number" min="0" max="1" step="0.01" value="0.05" style="width:80px; margin-left:8px"></label>
+        <label class="pill">pmax <input id="pmax" type="number" min="0" max="1" step="0.01" value="0.75" style="width:80px; margin-left:8px"></label>
+        <button class="ghost" id="applyProbBtn">Aplicar</button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="h2">🎲 Frangélico: límite de usos</div>
+      <div class="row" style="margin-top:8px">
+        <label class="pill">Max usos <input id="frMax" type="number" min="1" max="10" step="1" value="3" style="width:70px; margin-left:8px"></label>
+        <button class="ghost" id="applyFrMaxBtn">Aplicar</button>
+      </div>
+
+      <div class="divider"></div>
+      <div class="muted small">
+        Si quieres, te lo personalizo con vuestras pruebas exactas del PDF (Calle Laurel/San Juan, nombres, etc.).
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h2">🧩 Editar contenido</div>
+      <div class="muted small">Todo vive en arrays al final del archivo (busca “DATA”). Puedes pegar vuestras preguntas y pruebas ahí.</div>
+      <div class="box small">
+        <strong>Tip:</strong> Para el quiz del novio, usa respuestas tipo A/B/C/D para evitar discusiones.
+      </div>
+      <div class="divider"></div>
+      <div class="small muted">
+        ¿Quieres que lo haga “100% Gloria” (con Frangélico, Calle Laurel, Oscar, Masella, etc.)?  
+        Pégame aquí las preguntas del novio (o dime “usa las 10 del PDF”) y lo dejo cerrado.
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* =========================
+   DATA (EDITA AQUÍ)
+   ========================= */
+
+// CARTAS: peso = probabilidad relativa (más alto, más probable)
+const CARDS_BASE = [
+  { text:"Fer-se una foto amb un cambrer 📸", type:"Calle", tag:"Prova", weight:3, drink:"Si fallas: xupito" },
+  { text:"Ballar amb algú aleatori al carrer 💃", type:"Calle", tag:"Prova", weight:3, drink:"Si fallas: xupito" },
+  { text:"Demanar tapes per totes amb veu de gat 🐱", type:"Calle", tag:"Prova", weight:2, drink:"Si fallas: xupito" },
+  { text:"Abraçada a algú amb samarreta vermella ❤️", type:"Calle", tag:"Prova", weight:2, drink:"Si fallas: xupito" },
+  { text:"Signatura d’un desconegut al braç ✍️", type:"Calle", tag:"Prova", weight:2, drink:"Si fallas: xupito" },
+  { text:"Cantar ‘Al partir un beso y una flor’ i aconseguir 5€ 🎶", type:"Calle", tag:"Show", weight:1, drink:"Si fallas: xupito" },
+  { text:"Montar un limbo al carrer (com més gent, menys beus) 🪩", type:"Calle", tag:"Mini-joc", weight:2, drink:"Adaptable" },
+  { text:"Aconseguir que et convidin a una copa i un pintxo 🍷", type:"Calle", tag:"Bonus", weight:1, drink:"Si no: sorbo" },
+  { text:"Declaració d’amor a algú del carrer 💌", type:"Calle", tag:"Prova", weight:2, drink:"Si fallas: xupito" },
+  { text:"Trobar algú que es digui ‘Oscar’ 🔎", type:"Calle", tag:"Prova", weight:1, drink:"Si fallas: xupito" },
+
+  // Cartas “suaves / casa”
+  { text:"Brindis: cada una diu un desig per la Glòria 🥂", type:"Casa", tag:"Emotiu", weight:3, drink:"0" },
+  { text:"Reto rápido: 10s de baile sin juzgar 💥", type:"Casa", tag:"Reto", weight:3, drink:"0" },
+  { text:"La Glòria reparteix 2 sorbos (o 2 retos light) 🎁", type:"Casa", tag:"Repartir", weight:2, drink:"Opcional" },
+  { text:"Foto de equipo: pose ‘¡El último pintxo!’ 📸", type:"Casa", tag:"Foto", weight:2, drink:"0" },
+
+  // Cartas caóticas
+  { text:"Modo ‘voz de presentadora’ durante 5 min 🎤", type:"Caos", tag:"Acting", weight:1, drink:"Si rompes: sorbo" },
+  { text:"Doble o nada: repite la última carta para ganar inmunidad 1 ronda 😈", type:"Caos", tag:"Doble", weight:1, drink:"Si fallas: doble" },
+];
+
+// QUIZ DEL NOVIO (ejemplo con vuestras 10 del PDF, adaptadas a multiopción)
+// correctIndex: 0=A,1=B,2=C,3=D
+const QUIZ = [
+  {
+    q:"¿Dónde y cuándo fue el primer beso?",
+    a:["Costa Breve (2015, invierno)","El Palmar (2016, verano)","Sant Quirze (2014, otoño)","Masella (2017, invierno)"],
+    correctIndex:0,
+    reveal:"Costa Breve, 2015 (invierno)."
+  },
+  {
+    q:"¿Cuál es vuestro lugar de refugio?",
+    a:["Logroño / Calle Laurel","Cerdanya o El Palmar (Cádiz)","Marqués de Riscal","NYC 5th Avenue"],
+    correctIndex:1,
+    reveal:"Cerdanya o El Palmar (Cádiz)."
+  },
+  {
+    q:"¿Qué disfrutáis más hacer como pareja?",
+    a:["Salir de fiesta cada sábado","Viajar en motorhome y estar juntos","Hacer triatlón","Cocinar sushi siempre"],
+    correctIndex:1,
+    reveal:"Estar juntos; viajar (motorhome) y sofá/caricias mientras ella se duerme."
+  },
+  {
+    q:"En la uni, ¿quién dio el primer paso?",
+    a:["Ella, con un mensaje en IG","Él, pidiendo ayuda para un trabajo de inglés","Fue una cita a ciegas","Se conocieron esquiando"],
+    correctIndex:1,
+    reveal:"Él habló con ella para conseguir ayuda en un trabajo de inglés."
+  },
+  {
+    q:"¿Plato preferido del otro (aprox.)?",
+    a:["Paella y ramen","Buen pescado a la brasa","Pizza y hamburguesa","Solo ensaladas"],
+    correctIndex:1,
+    reveal:"Buen pescado (turbot/llobarro) a la brasa; en casa: pollo rebozado sin gluten."
+  },
+  {
+    q:"¿Primer viaje juntos?",
+    a:["Masella","El Palmar (Cádiz)","París","Logroño"],
+    correctIndex:1,
+    reveal:"El Palmar (Cádiz)."
+  },
+  {
+    q:"¿Sueño compartido ahora mismo?",
+    a:["Mudarse a Japón","Familia en Sant Quirze y seguir viajando; ver auroras boreales","Comprar una bodega","Vivir en un barco"],
+    correctIndex:1,
+    reveal:"Familia en Sant Quirze, seguir viajando, y algún día ver auroras boreales."
+  },
+  {
+    q:"¿Momento de más vergüenza?",
+    a:["En una boda","El primer día con Willi (nerviosismo)","En una entrevista","En una pista de esquí"],
+    correctIndex:1,
+    reveal:"El primer día que conoció a Willi (más nervios que vergüenza)."
+  },
+  {
+    q:"¿Olor/gusto que recuerda al otro?",
+    a:["Café y canela","Colonia (Abercrombie antes; ahora Loewe / champú Zig Zag)","Chocolate","Hierba cortada"],
+    correctIndex:1,
+    reveal:"Antes Abercrombie; ahora Loewe o champú Zig Zag; de ella: Carolina Herrera."
+  },
+  {
+    q:"¿Costumbre extraña adorable del otro?",
+    a:["Dejar todo para mañana","Ir a misa; obsesión con la limpieza","Coleccionar piedras","Cantar ópera"],
+    correctIndex:1,
+    reveal:"Ir a misa; y su obsesión con la limpieza (le pone nervioso a veces)."
+  },
+];
+
+// PASAPALABRA (del PDF, tal cual)
+const PASAPALABRA = [
+  { letter:"A", clue:"El que sents pel teu futur espòs", word:"Amor" },
+  { letter:"B", clue:"Estat en el que acabaràs avui", word:"Borratxa" },
+  { letter:"C", clue:"Casos clínics dels que tant ens has parlat", word:"Cuo" },
+  { letter:"D", clue:"La millor professió del món", word:"Dentista" },
+  { letter:"E", clue:"Esport que adores i que ens ha unit", word:"Esquí" },
+  { letter:"F", clue:"Beguda que promocionarà la teva despedida", word:"Frangelico" },
+  { letter:"G", clue:"Animal que odies amb totes les teves forces", word:"Gat" },
+  { letter:"H", clue:"Objecte amb el que tenim molts récord de petites", word:"Hula hop" },
+  { letter:"I", clue:"Animal que veiem de tant en tant per les pistes", word:"Isard" },
+  { letter:"J", clue:"El que adores fer amb l’Oscar i no pensem malament…", word:"Jalar" },
+  { letter:"K", clue:"La Biblia sexual que mai et faltarà", word:"Kamasutra" },
+  { letter:"L", clue:"El que fas per quadrar totes les teves clíniques", word:"Logística" },
+  { letter:"M", clue:"El teu lloc refugi", word:"Masella" },
+  { letter:"N", clue:"El que tindràs el dia del casament", word:"Nervis" },
+  { letter:"O", clue:"L’amor de la teva vida", word:"Oscar" },
+  { letter:"P", clue:"Paraula que direm quan et veiem vestida de núvia", word:"Preciosa" },
+  { letter:"Q", clue:"Allò que veus cada dia a la consulta", word:"Queixal" },
+  { letter:"R", clue:"El que mai falta quan estàs amb nosaltres", word:"Rialles" },
+  { letter:"S", clue:"Sorpresa que encara no saps que et tenim preparada", word:"Striptease" },
+  { letter:"T", clue:"Personatge còmic amb el que identifiques a l’Oscar", word:"Tintín" },
+  { letter:"U", clue:"El que us va unir a l’Oscar i tu", word:"UIC" },
+  { letter:"V", clue:"El que cridarem quan us veurem sortir del altar", word:"Viva los novios" },
+  { letter:"W", clue:"Encara que et casis sempre seguiràs sent la seva nena…", word:"Willy" },
+  { letter:"X", clue:"El que obriràs per celebrar-ho tot", word:"Xampany" },
+  { letter:"Y", clue:"L’equilibri perfecte entre festa i bogeria", word:"Ying Yang" },
+  { letter:"Z", clue:"El teu millor amic a l’hora de fer corones", word:"Zirconi" },
+];
+
+// FRANGELICO DECIDE (pesos)
+const FRANGELICO_BASE = [
+  { text:"Chupito (o reto rápido si sin alcohol) 🥃", weight:3, alcohol:true },
+  { text:"Reparte 2 sorbos / 2 retos 🎁", weight:3, alcohol:true },
+  { text:"Beben todas (light) 🥂", weight:2, alcohol:true },
+  { text:"Inmunidad 1 ronda 🛡️", weight:2, alcohol:false },
+  { text:"Reto absurdo: voz de gato 2 min 🐱", weight:2, alcohol:false },
+  { text:"Foto de grupo obligatoria 📸", weight:2, alcohol:false },
+  { text:"Elige a tu ‘escudera’ por 30 min 👑", weight:1, alcohol:false },
+];
+
+/* =========================
+   ENGINE
+   ========================= */
+
+const state = {
+  tab:"cartas",
+  noRepeat:true,
+  alcohol:true,
+  chaos:"Medio", // Suave | Medio | Caótico
+  history:[],
+  deck:[],
+  deckUsed:[],
+  lastCard:null,
+
+  // Quiz
+  qIndex:-1,
+  correct:0,
+  answered:false,
+  pmin:0.05,
+  pmax:0.75,
+
+  // Frangelico
+  frUses:0,
+  frMax:3,
+
+  // Pasapalabra
+  ppRunning:false,
+  ppTime:90,
+  ppLeft:90,
+  ppIdx:0,
+  ppPassed:0,
+  ppShown:0,
+  ppTimerId:null
+};
+
+function clamp(x,min,max){ return Math.max(min, Math.min(max, x)); }
+
+function weightedPick(items){
+  const total = items.reduce((s,i)=> s + (i.weight||1), 0);
+  let r = Math.random() * total;
+  for (const it of items){
+    r -= (it.weight||1);
+    if (r <= 0) return it;
+  }
+  return items[items.length-1];
+}
+
+function buildDeck(){
+  // Ajuste de pesos por caos
+  const mult = (t)=>{
+    if(state.chaos==="Suave"){
+      if(t==="Caos") return 0.35;
+      if(t==="Calle") return 0.85;
+      return 1.25;
+    }
+    if(state.chaos==="Caótico"){
+      if(t==="Caos") return 1.7;
+      if(t==="Calle") return 1.25;
+      return 0.85;
+    }
+    return 1; // Medio
+  };
+
+  state.deck = CARDS_BASE.map(c => ({
+    ...c,
+    weight: Math.max(0.1, (c.weight||1) * mult(c.type))
+  }));
+  state.deckUsed = [];
+  state.lastCard = null;
+  updateDeckInfo();
+}
+
+function cardToHTML(c){
+  const d = (!state.alcohol || c.drink==="0") ? "Sin alcohol" : c.drink;
+  return `<div class="card" style="padding:10px">
+    <div style="font-weight:900;color:var(--bottle)">${escapeHtml(c.text)}</div>
+    <div class="small muted">${escapeHtml(c.type)} · ${escapeHtml(c.tag)} · ${escapeHtml(d)}</div>
+  </div>`;
+}
+
+function escapeHtml(s){
+  return (s??"").toString().replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[m]));
+}
+
+/* =========================
+   UI: Tabs
+   ========================= */
+const tabsEl = document.getElementById("tabs");
+tabsEl.addEventListener("click",(e)=>{
+  const btn = e.target.closest(".tabbtn");
+  if(!btn) return;
+  setTab(btn.dataset.tab);
+});
+function setTab(name){
+  state.tab = name;
+  document.querySelectorAll(".tabbtn").forEach(b=> b.classList.toggle("active", b.dataset.tab===name));
+  document.querySelectorAll("[id^='tab-']").forEach(sec=> sec.classList.add("hidden"));
+  document.getElementById(`tab-${name}`).classList.remove("hidden");
+}
+
+/* =========================
+   CARTAS
+   ========================= */
+const deckInfo = document.getElementById("deckInfo");
+const repeatInfo = document.getElementById("repeatInfo");
+const alcoholInfo = document.getElementById("alcoholInfo");
+const cardText = document.getElementById("cardText");
+const cardTag = document.getElementById("cardTag");
+const cardType = document.getElementById("cardType");
+const cardDrink = document.getElementById("cardDrink");
+const historyEl = document.getElementById("history");
+
+document.getElementById("drawCardBtn").onclick = ()=>{
+  if(state.noRepeat){
+    if(state.deck.length===0){
+      cardText.textContent = "Mazo vacío. Dale a ‘Reset mazo’.";
+      return;
+    }
+    const picked = weightedPick(state.deck);
+    // remove first matching instance
+    const idx = state.deck.findIndex(x=> x.text===picked.text);
+    const [c] = state.deck.splice(idx,1);
+    state.deckUsed.push(c);
+    showCard(c);
+  }else{
+    const c = weightedPick(state.deck);
+    showCard(c);
+  }
+  updateDeckInfo();
+};
+document.getElementById("undoCardBtn").onclick = ()=>{
+  if(!state.lastCard || state.history.length===0) return;
+  const removed = state.history.pop();
+  if(state.noRepeat){
+    // return to deck
+    state.deck.push(removed);
+    state.deckUsed = state.deckUsed.filter(x=> x.text!==removed.text);
+  }
+  state.lastCard = state.history[state.history.length-1] || null;
+  if(state.lastCard) showCard(state.lastCard, true);
+  else{
+    cardText.textContent = "Deshecho. Lista para la siguiente ✨";
+    cardTag.textContent = "—";
+    cardType.textContent = "—";
+    cardDrink.textContent = "—";
+  }
+  renderHistory();
+  updateDeckInfo();
+};
+document.getElementById("resetDeckBtn").onclick = ()=>{
+  buildDeck();
+  cardText.textContent = "Mazo reseteado. ¡A por el pintxo!";
+  cardTag.textContent = "—";
+  cardType.textContent = "—";
+  cardDrink.textContent = "—";
+};
+document.getElementById("clearHistoryBtn").onclick = ()=>{
+  state.history = [];
+  state.lastCard = null;
+  renderHistory();
+};
+function showCard(c, silent=false){
+  state.lastCard = c;
+  if(!silent) state.history.push(c);
+  cardText.textContent = c.text;
+  cardTag.textContent = `#${c.tag}`;
+  cardType.textContent = c.type;
+  cardDrink.textContent = (!state.alcohol || c.drink==="0") ? "Sin alcohol" : c.drink;
+  renderHistory();
+}
+function renderHistory(){
+  historyEl.innerHTML = state.history.slice().reverse().map(cardToHTML).join("");
+  if(state.history.length===0) historyEl.innerHTML = `<div class="muted small">Aún no hay cartas en el historial.</div>`;
+}
+function updateDeckInfo(){
+  deckInfo.textContent = `Mazo: ${state.deck.length} cartas`;
+  repeatInfo.textContent = `No repetir: ${state.noRepeat ? "ON":"OFF"}`;
+  alcoholInfo.textContent = `Alcohol: ${state.alcohol ? "ON":"OFF"}`;
+}
+
+/* =========================
+   QUIZ
+   ========================= */
+const quizProgress = document.getElementById("quizProgress");
+const quizScore = document.getElementById("quizScore");
+const quizQ = document.getElementById("quizQ");
+const quizChoices = document.getElementById("quizChoices");
+const quizFeedback = document.getElementById("quizFeedback");
+const quizNextBtn = document.getElementById("quizNextBtn");
+
+document.getElementById("quizStartBtn").onclick = ()=>{
+  resetQuiz();
+  state.qIndex = 0;
+  renderQuiz();
+};
+quizNextBtn.onclick = ()=>{
+  if(state.qIndex < QUIZ.length-1){
+    state.qIndex++;
+    state.answered = false;
+    renderQuiz();
+  }else{
+    showQuizResult();
+  }
+};
+document.getElementById("quizResetBtn").onclick = resetQuiz;
+
+function resetQuiz(){
+  state.qIndex = -1;
+  state.correct = 0;
+  state.answered = false;
+  quizQ.textContent = "Pulsa “Empezar”.";
+  quizChoices.innerHTML = "";
+  quizFeedback.textContent = "";
+  quizNextBtn.disabled = true;
+  updateQuizMeta();
+  document.getElementById("answerKey").classList.add("hidden");
+  document.getElementById("answerKey").innerHTML = "";
+  document.getElementById("quizResult").textContent = "Aún no hay resultado.";
+  document.getElementById("pNow").textContent = "p —";
+}
+function updateQuizMeta(){
+  const total = QUIZ.length;
+  const idx = state.qIndex>=0 ? state.qIndex+1 : 0;
+  quizProgress.textContent = `Pregunta ${idx}/${total}`;
+  quizScore.textContent = `Aciertos: ${state.correct}`;
+  document.getElementById("pMinMax").textContent = `pmin ${state.pmin.toFixed(2)} / pmax ${state.pmax.toFixed(2)}`;
+}
+function renderQuiz(){
+  const item = QUIZ[state.qIndex];
+  updateQuizMeta();
+  quizQ.textContent = item.q;
+  quizFeedback.textContent = "";
+  quizChoices.innerHTML = item.a.map((opt,i)=>`
+    <button class="choice" data-i="${i}">${String.fromCharCode(65+i)}) ${escapeHtml(opt)}</button>
+  `).join("");
+  quizNextBtn.disabled = true;
+
+  quizChoices.querySelectorAll(".choice").forEach(btn=>{
+    btn.onclick = ()=>{
+      if(state.answered) return;
+      state.answered = true;
+      const pick = Number(btn.dataset.i);
+      const correct = item.correctIndex;
+      if(pick === correct) state.correct++;
+      quizChoices.querySelectorAll(".choice").forEach((b,ii)=>{
+        b.classList.toggle("correct", ii===correct);
+        b.classList.toggle("wrong", ii===pick && pick!==correct);
+      });
+      quizFeedback.textContent = `Respuesta del novio: ${item.reveal}`;
+      updateQuizMeta();
+      quizNextBtn.disabled = false;
+      if(state.qIndex === QUIZ.length-1) quizNextBtn.textContent = "Ver resultado";
+      else quizNextBtn.textContent = "Siguiente";
+    };
+  });
+}
+
+function currentPunishProb(){
+  const N = QUIZ.length;
+  const k = state.correct;
+  const p = state.pmin + (1 - (k / N)) * (state.pmax - state.pmin);
+  return clamp(p, 0, 1);
+}
+function showQuizResult(){
+  updateQuizMeta();
+  const p = currentPunishProb();
+  document.getElementById("pNow").textContent = `p ${p.toFixed(2)}`;
+  const msg = `Final: ${state.correct}/${QUIZ.length} aciertos → prob. castigo ≈ ${(p*100).toFixed(0)}%`;
+  document.getElementById("quizResult").textContent = msg;
+  quizNextBtn.disabled = true;
+}
+
+document.getElementById("rollPunishBtn").onclick = ()=>{
+  if(state.qIndex < 0){
+    document.getElementById("quizResult").textContent = "Primero haz el quiz 🙂";
+    return;
+  }
+  const p = currentPunishProb();
+  const r = Math.random();
+  const toc = r < p;
+  const punishment = state.alcohol ? "CHUPITO" : "RETO RÁPIDO";
+  document.getElementById("quizResult").textContent =
+    toc ? `🔥 TOCA ${punishment} (r=${r.toFixed(2)} < p=${p.toFixed(2)})`
+        : `🛡️ NO TOCA (r=${r.toFixed(2)} ≥ p=${p.toFixed(2)})`;
+  document.getElementById("pNow").textContent = `p ${p.toFixed(2)}`;
+};
+
+document.getElementById("revealAnswersBtn").onclick = ()=>{
+  const key = document.getElementById("answerKey");
+  key.classList.toggle("hidden");
+  if(!key.classList.contains("hidden")){
+    key.innerHTML = QUIZ.map((it,idx)=>{
+      const correct = it.a[it.correctIndex];
+      return `<div style="margin-bottom:8px"><strong>${idx+1}.</strong> ${escapeHtml(it.q)}<br><span class="muted">Clave: ${escapeHtml(correct)}.</span></div>`;
+    }).join("");
+  }
+};
+
+/* =========================
+   FRANGELICO
+   ========================= */
+const frUses = document.getElementById("frUses");
+const frText = document.getElementById("frText");
+const frNoAlcohol = document.getElementById("frNoAlcohol");
+
+function updateFrMeta(){
+  frUses.textContent = `Usos: ${state.frUses}/${state.frMax}`;
+  frNoAlcohol.textContent = `Modo sin alcohol: ${state.alcohol ? "OFF":"ON"}`;
+}
+document.getElementById("frRollBtn").onclick = ()=>{
+  if(state.frUses >= state.frMax){
+    frText.textContent = "🚫 Límite alcanzado. Guardad algo de dignidad para el brunch 😇";
+    return;
+  }
+  state.frUses++;
+  const pick = weightedPick(FRANGELICO_BASE);
+  if(!state.alcohol && pick.alcohol){
+    frText.textContent = "✨ Reto rápido (sin alcohol): 10s de baile + selfie grupal 📸";
+  }else{
+    frText.textContent = pick.text;
+  }
+  updateFrMeta();
+};
+document.getElementById("frResetBtn").onclick = ()=>{
+  state.frUses = 0;
+  frText.textContent = "¿Nos dejamos llevar…?";
+  updateFrMeta();
+};
+
+/* =========================
+   PASAPALABRA
+   ========================= */
+const ppTimer = document.getElementById("ppTimer");
+const ppIndex = document.getElementById("ppIndex");
+const ppClue = document.getElementById("ppClue");
+const ppWord = document.getElementById("ppWord");
+const ppPassed = document.getElementById("ppPassed");
+const ppShown = document.getElementById("ppShown");
+
+function renderPP(){
+  const it = PASAPALABRA[state.ppIdx];
+  ppTimer.textContent = `Tiempo: ${state.ppLeft}s`;
+  ppIndex.textContent = `Letra: ${it.letter}`;
+  ppClue.textContent = `${it.letter} — ${it.clue}`;
+  ppPassed.textContent = `Pasadas: ${state.ppPassed}`;
+  ppShown.textContent = `Reveladas: ${state.ppShown}`;
+}
+function stopPP(){
+  state.ppRunning = false;
+  if(state.ppTimerId) clearInterval(state.ppTimerId);
+  state.ppTimerId = null;
+  document.getElementById("ppPassBtn").disabled = true;
+  document.getElementById("ppShowBtn").disabled = true;
+}
+document.getElementById("ppStartBtn").onclick = ()=>{
+  if(state.ppRunning) return;
+  state.ppRunning = true;
+  document.getElementById("ppPassBtn").disabled = false;
+  document.getElementById("ppShowBtn").disabled = false;
+
+  state.ppTimerId = setInterval(()=>{
+    state.ppLeft--;
+    ppTimer.textContent = `Tiempo: ${state.ppLeft}s`;
+    if(state.ppLeft<=0){
+      stopPP();
+      ppClue.textContent = "⏱️ Tiempo. Brindis final y se acabó.";
+      ppWord.textContent = "";
+    }
+  }, 1000);
+};
+document.getElementById("ppPassBtn").onclick = ()=>{
+  state.ppPassed++;
+  state.ppIdx = (state.ppIdx + 1) % PASAPALABRA.length;
+  ppWord.textContent = "";
+  renderPP();
+};
+document.getElementById("ppShowBtn").onclick = ()=>{
+  const it = PASAPALABRA[state.ppIdx];
+  state.ppShown++;
+  ppWord.textContent = `Palabra: ${it.word}`;
+  renderPP();
+};
+document.getElementById("ppResetBtn").onclick = ()=>{
+  stopPP();
+  state.ppTime = 90;
+  state.ppLeft = 90;
+  state.ppIdx = 0;
+  state.ppPassed = 0;
+  state.ppShown = 0;
+  ppClue.textContent = "—";
+  ppWord.textContent = "";
+  renderPP();
+};
+
+/* =========================
+   AJUSTES
+   ========================= */
+const toggleNoRepeatBtn = document.getElementById("toggleNoRepeatBtn");
+const toggleAlcoholBtn = document.getElementById("toggleAlcoholBtn");
+const toggleChaosBtn = document.getElementById("toggleChaosBtn");
+
+toggleNoRepeatBtn.onclick = ()=>{
+  state.noRepeat = !state.noRepeat;
+  toggleNoRepeatBtn.textContent = `No repetir: ${state.noRepeat ? "ON":"OFF"}`;
+  updateDeckInfo();
+  buildDeck();
+};
+toggleAlcoholBtn.onclick = ()=>{
+  state.alcohol = !state.alcohol;
+  toggleAlcoholBtn.textContent = `Alcohol: ${state.alcohol ? "ON":"OFF"}`;
+  updateDeckInfo();
+  updateFrMeta();
+};
+toggleChaosBtn.onclick = ()=>{
+  state.chaos = (state.chaos==="Suave") ? "Medio" : (state.chaos==="Medio" ? "Caótico" : "Suave");
+  toggleChaosBtn.textContent = `Modo: ${state.chaos}`;
+  buildDeck();
+};
+
+document.getElementById("applyProbBtn").onclick = ()=>{
+  const pmin = Number(document.getElementById("pmin").value);
+  const pmax = Number(document.getElementById("pmax").value);
+  state.pmin = clamp(pmin,0,1);
+  state.pmax = clamp(pmax,0,1);
+  if(state.pmax < state.pmin){
+    const tmp = state.pmin; state.pmin = state.pmax; state.pmax = tmp;
+  }
+  updateQuizMeta();
+  showQuizResult();
+};
+document.getElementById("applyFrMaxBtn").onclick = ()=>{
+  state.frMax = clamp(Number(document.getElementById("frMax").value),1,10);
+  updateFrMeta();
+};
+
+/* =========================
+   INIT
+   ========================= */
+buildDeck();
+renderHistory();
+updateQuizMeta();
+updateFrMeta();
+renderPP();
+setTab("cartas");
+</script>
+</body>
+</html>
